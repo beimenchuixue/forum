@@ -1,6 +1,6 @@
 package main
 
-import "bbs/app/web"
+import "forum/app/web"
 
 func main() {
 	webApp := web.NewApp()

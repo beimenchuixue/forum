@@ -1,8 +1,8 @@
 package web
 
 import (
-	"bbs/app/user"
-	"bbs/conn"
+	"forum/app/user"
+	"forum/conn"
 )
 
 // auto 自动做数据模型迁移，将数据模型映射到表

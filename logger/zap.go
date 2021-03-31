@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"bbs/settings"
+	"forum/settings"
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

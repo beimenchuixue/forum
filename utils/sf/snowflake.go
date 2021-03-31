@@ -1,7 +1,7 @@
 package sf
 
 import (
-	"bbs/settings"
+	"forum/settings"
 	"github.com/bwmarrin/snowflake"
 	"time"
 )

@@ -1,4 +1,4 @@
-name: "web_app"
+name: "forumBbs"
 version: "v1.0.0"
 mode: "debug"
 port: 9000
@@ -28,7 +28,7 @@ snowflake:
 
 log:
   dir: "."
-  filename: "bbs.log"
+  filename: "forum.log"
   level: "info"
   max_size: 1024
   max_age: 100

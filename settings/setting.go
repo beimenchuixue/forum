@@ -67,7 +67,7 @@ func init() {
 	//
 
 	// 绝对路径
-	viper.SetConfigFile("D:\\work\\src\\bbs\\config.yaml")
+	viper.SetConfigFile("D:\\work\\src\\forum\\config.yaml")
 
 	err := viper.ReadInConfig()
 	if err != nil {

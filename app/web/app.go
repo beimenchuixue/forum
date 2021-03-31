@@ -1,11 +1,11 @@
 package web
 
 import (
-	_ "bbs/conn" // 执行初始化工作
-	_ "bbs/logger"
-	"bbs/middleware"
-	"bbs/settings"
 	"fmt"
+	_ "forum/conn" // 执行初始化工作
+	_ "forum/logger"
+	"forum/middleware"
+	"forum/settings"
 	"github.com/beego/beego/v2/core/validation"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"

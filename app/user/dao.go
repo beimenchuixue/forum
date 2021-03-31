@@ -1,12 +1,12 @@
 package user
 
 import (
-	"bbs/conn"
-	"bbs/settings"
-	"bbs/utils/sf"
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
+	"forum/conn"
+	"forum/settings"
+	"forum/utils/sf"
 )
 
 // SignupUser 注册用户

@@ -1,8 +1,8 @@
 package conn
 
 import (
-	"bbs/settings"
 	"fmt"
+	"forum/settings"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

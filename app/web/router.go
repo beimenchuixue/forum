@@ -1,7 +1,7 @@
 package web
 
 import (
-	"bbs/app/user"
+	"forum/app/user"
 	"github.com/gin-gonic/gin"
 )
 

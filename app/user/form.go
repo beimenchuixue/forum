@@ -1,7 +1,7 @@
 package user
 
 import (
-	"bbs/utils/names"
+	"forum/utils/names"
 	"github.com/beego/beego/v2/core/validation"
 )
 

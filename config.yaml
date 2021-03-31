@@ -1,0 +1,35 @@
+name: "web_app"
+version: "v1.0.0"
+mode: "debug"
+port: 9000
+bind: "*"
+secret_key: "北门吹雪:https://www.cnblogs.com/2bjiujiu/"
+author: "北门吹雪"
+
+mysql:
+  host: "localhost"
+  port: 3306
+  user: bbs
+  password: "bbs"
+  dbname: "bbs"
+  max_conn: 200
+  max_idle_conn: 50
+
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: ""
+  pool_size: 10000
+
+snowflake:
+  time: "2021-3-29"
+  machine_id: 1
+
+log:
+  dir: "."
+  filename: "bbs.log"
+  level: "info"
+  max_size: 1024
+  max_age: 100
+  max_backup: 20

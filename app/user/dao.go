@@ -41,3 +41,15 @@ func GeneratePwd(pwd string) string {
 	m.Write([]byte(pwd + settings.Conf.SecretKey))
 	return hex.EncodeToString(m.Sum(nil))
 }
+
+func Login(username string, pwd string) (user *User, ok bool) {
+	user, ok = QueryUser(username)
+	if !ok {
+		return nil, false
+	}
+	// 查看密码是否正确
+	if user.Password == GeneratePwd(pwd) {
+		return user, true
+	}
+	return nil, false
+}

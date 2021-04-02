@@ -1,19 +1,23 @@
 package settings
 
 import (
+	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 	"log"
 )
 
+// Conf 作为包全局变量，单例模式
 var Conf = new(AppConfig)
 
 //AppConfig webApp的总配置
 type AppConfig struct {
-	Name    string `mapstructure:"name"`
-	Version string `mapstructure:"version"`
-	Port    int    `mapstructure:"port"`
-	Bind    string `mapstructure:"bind"`
-	Mode    string `mapstructure:"mode"`
+	Name      string `mapstructure:"name"`
+	Version   string `mapstructure:"version"`
+	Port      int    `mapstructure:"port"`
+	Bind      string `mapstructure:"bind"`
+	Mode      string `mapstructure:"mode"`
+	SecretKey string `mapstructure:"secret_key"`
+	Author    string `mapstructure:"author"`
 
 	*MySQLConfig     `mapstructure:"mysql"`
 	*RedisConfig     `mapstructure:"redis"`
@@ -30,7 +34,6 @@ type MySQLConfig struct {
 	DBName      string `mapstructure:"dbname"`
 	MaxConn     string `mapstructure:"max_conn"`
 	MaxIdleConn string `mapstructure:"max_idle_conn"`
-	SecretKey   string `mapstructure:"secret_key"`
 	Author      string `mapstructure:"author"`
 }
 
@@ -64,11 +67,11 @@ func init() {
 	//viper.SetConfigFile("config.yaml")
 	//// 2. 指定文件查找路径
 	//viper.AddConfigPath("./")
-	//
 
-	// 绝对路径
+	// 配置文件绝对路径
 	viper.SetConfigFile("D:\\work\\src\\forum\\config.yaml")
 
+	// 读取配置文件
 	err := viper.ReadInConfig()
 	if err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
@@ -77,8 +80,19 @@ func init() {
 			log.Fatalln("settings:", err)
 		}
 	}
+	// 将配置文件数据映射填充到结构中
 	err = viper.Unmarshal(Conf)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// 配置文件修改自动重新读取
+	viper.WatchConfig()
+	viper.OnConfigChange(func(in fsnotify.Event) {
+		err = viper.Unmarshal(Conf)
+		err = viper.Unmarshal(Conf)
+		if err != nil {
+			log.Fatalln("settings:", err)
+		}
+	})
 }

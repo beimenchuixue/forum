@@ -27,8 +27,8 @@ snowflake:
   machine_id: 1
 
 log:
-  dir: "."
-  filename: "forum.log"
+  dir: "./logfile"
+  filename: "bbs.log"
   level: "info"
   max_size: 1024
   max_age: 100

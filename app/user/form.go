@@ -6,16 +6,8 @@ import (
 )
 
 // 对数据进行校验
-
-// SignupForm 用户登录校验
-type SignupForm struct {
-	UserName   string `json:"username" valid:"Required"`
-	Password   string `json:"password" valid:"Required"`
-	RePassword string `json:"re_password" valid:"Required"`
-}
-
-// SignupValid 对用户登录提交的数据进行校验
-func SignupValid(sf *User) (ok bool, err error, errMap map[string]string) {
+// ValidData 对用户登录提交的数据进行校验
+func ValidData(sf *User) (ok bool, err error, errMap map[string]interface{}) {
 	//2. 参数校验
 	valid := validation.Validation{}
 	ok, err = valid.Valid(sf)
@@ -28,7 +20,7 @@ func SignupValid(sf *User) (ok bool, err error, errMap map[string]string) {
 	if !ok {
 		// e.field e.tmpl
 		errors := valid.Errors
-		errMap = make(map[string]string, len(errors))
+		errMap = make(map[string]interface{}, len(errors))
 		for _, e := range errors {
 			errMap[names.UnMarshal(e.Field)] = e.Tmpl
 		}

@@ -5,6 +5,7 @@ go 1.15
 require (
 	github.com/beego/beego/v2 v2.0.1
 	github.com/bwmarrin/snowflake v0.3.0
+	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect

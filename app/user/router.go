@@ -2,7 +2,9 @@ package user
 
 import "github.com/gin-gonic/gin"
 
-func Router(g *gin.RouterGroup) {
-	g.POST("/join", SignupHandler)
+// Router 用户模型相关路由
+func Router(g *gin.Engine) {
+	//1. 用户路由
+	g.POST("/signup", SignupHandler)
 	g.POST("/login", LoginHandler)
 }

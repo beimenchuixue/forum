@@ -18,6 +18,7 @@ type AppConfig struct {
 	Mode      string `mapstructure:"mode"`
 	SecretKey string `mapstructure:"secret_key"`
 	Author    string `mapstructure:"author"`
+	TokenExp  int    `mapstructure:"token_exp"`
 
 	*MySQLConfig     `mapstructure:"mysql"`
 	*RedisConfig     `mapstructure:"redis"`

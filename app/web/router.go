@@ -2,14 +2,13 @@ package web
 
 import (
 	"forum/app/user"
+	"forum/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 // Manager 路由管理者，路由入口，完成路由注册
 func RouterManager(router *gin.Engine) {
-	router.GET("/", Index)
+	router.GET("/ping", middleware.JwtMiddleware(), Index)
 
-	//1. 用户路由
-	userG := router.Group("/users")
-	user.Router(userG)
+	user.Router(router)
 }

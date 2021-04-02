@@ -53,3 +53,9 @@ func (r *Response) ErrResponse(httpCode int, statusCode StatusCode, err error, m
 	jsonD := NewJsonData(statusCode, logicErr, data)
 	r.ctx.JSON(httpCode, jsonD)
 }
+
+// CorrectResponse 正确响应
+func (r *Response) CorrectResponse(httpCode int, statusCode StatusCode, data map[string]interface{}) {
+	jsonD := NewJsonData(statusCode, nil, data)
+	r.ctx.JSON(httpCode, jsonD)
+}

@@ -20,6 +20,7 @@ const (
 	ErrUserExist
 	ErrInvalidUsernameOrPassword
 	ErrInvalidParam
+	ErrServiceBusy
 )
 
 // 用户模块相关的成功响应请求的状态码
@@ -34,6 +35,7 @@ var userStatusMap = map[StatusCode]string{
 	ErrUserNotExist:              "用户不存在",
 	ErrUserExist:                 "用户已经存在",
 	ErrInvalidUsernameOrPassword: "用户名或者密码错误",
+	ErrServiceBusy:               "服务器繁忙",
 
 	// 正确码
 	LonginSuccess: "用户登录成功",

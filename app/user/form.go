@@ -3,7 +3,42 @@ package user
 import (
 	"forum/utils/names"
 	"github.com/beego/beego/v2/core/validation"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
+
+// ValidUserData 获取并校验用户参数
+func ValidUserData(ctx *gin.Context) (u *User, ok bool) {
+	// 1. 获取参数
+	resp := NewResponse(ctx)
+	u = new(User)
+	err := ctx.ShouldBindJSON(u)
+	if err != nil {
+		resp.ErrResponse(http.StatusOK, ErrInvalidParam, err, "ShouldBindJSON 绑定参数失败",
+			gin.H{"params": "参数出错"}, nil,
+		)
+		return nil, false
+	}
+
+	//2. 校验参数
+	ok, err, errMap := ValidData(u)
+	// 处理校验这个过程失败
+	if err != nil {
+		resp.ErrResponse(http.StatusOK, ErrInvalidParam, err, "ValidData 校验过程失败失败",
+			gin.H{"params": "参数出错"}, nil,
+		)
+		return nil, false
+	}
+
+	// 处理参数不符合要求
+	if !ok {
+		resp.ErrResponse(http.StatusOK, ErrInvalidParam, err, "ValidData 校验参数失败",
+			errMap, nil,
+		)
+		return nil, false
+	}
+	return u, true
+}
 
 // 对数据进行校验
 // ValidData 对用户登录提交的数据进行校验

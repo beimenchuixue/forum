@@ -1,41 +1,22 @@
 package user
 
 import (
+	"forum/utils/jwt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-// ValidUserData 获取并校验用户参数
-func ValidUserData(ctx *gin.Context) (u *User, ok bool) {
-	// 1. 获取参数
-	resp := NewResponse(ctx)
-	u = new(User)
-	err := ctx.ShouldBindJSON(u)
+func LoginAndSignupCorrectResponse(resp *Response, u *User) {
+	token := jwt.Toke{}
+	tokenStr, err := token.GetToken(u.UserId)
 	if err != nil {
-		resp.ErrResponse(http.StatusOK, ErrInvalidParam, err, "ShouldBindJSON 绑定参数失败",
-			gin.H{"params": "参数出错"}, nil,
+		resp.ErrResponse(http.StatusOK, ErrServiceBusy, err, "GetToken json解析错误",
+			gin.H{"params": GetStatusString(ErrServiceBusy)}, nil,
 		)
-		return nil, false
+		return
 	}
-
-	//2. 校验参数
-	ok, err, errMap := ValidData(u)
-	// 处理校验这个过程失败
-	if err != nil {
-		resp.ErrResponse(http.StatusOK, ErrInvalidParam, err, "ValidData 校验过程失败失败",
-			gin.H{"params": "参数出错"}, nil,
-		)
-		return nil, false
-	}
-
-	// 处理参数不符合要求
-	if !ok {
-		resp.ErrResponse(http.StatusOK, ErrInvalidParam, err, "ValidData 校验参数失败",
-			errMap, nil,
-		)
-		return nil, false
-	}
-	return u, true
+	// 返回正确的响应
+	resp.CorrectResponse(http.StatusOK, LonginSuccess, gin.H{"token": tokenStr})
 }
 
 // SignupHandler 用户注册业务逻辑
@@ -55,13 +36,8 @@ func SignupHandler(ctx *gin.Context) {
 		return
 	}
 
-	// 生成jwt或者设置cookie
-	ctx.JSON(http.StatusOK, gin.H{
-		"code":  2000,
-		"error": gin.H{},
-		"jwt":   "x.x.x",
-		"data":  []interface{}{},
-	})
+	// // 生成jwt, 返回token数据
+	LoginAndSignupCorrectResponse(resp, u)
 }
 
 // LoginHandler 处理用户登录
@@ -81,12 +57,6 @@ func LoginHandler(ctx *gin.Context) {
 		)
 		return
 	}
-
-	// 生成jwt或者设置cookie
-	ctx.JSON(http.StatusOK, gin.H{
-		"code":  2000,
-		"error": gin.H{},
-		"jwt":   "x.x.x",
-		"data":  []interface{}{},
-	})
+	// 生成jwt, 返回token数据
+	LoginAndSignupCorrectResponse(resp, u)
 }

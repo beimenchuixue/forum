@@ -42,6 +42,7 @@ func GeneratePwd(pwd string) string {
 	return hex.EncodeToString(m.Sum(nil))
 }
 
+// Login 用户登录逻辑，检查用户名和密码是否一一匹配
 func Login(username string, pwd string) (user *User, ok bool) {
 	user, ok = QueryUser(username)
 	if !ok {

@@ -5,6 +5,7 @@ port: 9000
 bind: "*"
 secret_key: "北门吹雪:https://www.cnblogs.com/2bjiujiu/"
 author: "北门吹雪"
+token_exp: 10
 
 mysql:
   host: "localhost"
